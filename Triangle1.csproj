@@ -73,6 +73,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="kolmnurgad.xml" />
     <Content Include="ostrougol.jpg" />
     <Content Include="prjamugol.png" />
     <Content Include="ravnobed.png" />

@@ -38,13 +38,18 @@ namespace Triangle1
         }
 
         // Метод для вычисления площади треугольника (основание и высота)
-        public double Area()
+        public double Area1()
         {
             return (A * H) / 2;
         }
         public double Perimeter() // Метод для вычисления периметра треугольника
         {
             return A + B + C;
+        }
+        public double Area()
+        {
+            double semiPerimeter = Perimeter() / 2; // Полупериметр
+            return Math.Sqrt(semiPerimeter * (semiPerimeter - A) * (semiPerimeter - B) * (semiPerimeter - C));
         }
 
 

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Triangles>
+
+    <Triangle>
+
+        <Base>12</Base>
+
+        <Side1>12</Side1>
+
+        <Side2>12</Side2>
+
+        <Perimeter>36</Perimeter>
+
+        <Area>62.353829072479584</Area>
+
+        <Type>Võrdkülgne</Type>
+
+    </Triangle>
+
+    <Triangle>
+
+        <Base>15</Base>
+
+        <Side1>15</Side1>
+
+        <Side2>15</Side2>
+
+        <Perimeter>45</Perimeter>
+
+        <Area>97.42785792574935</Area>
+
+        <Type>Võrdkülgne</Type>
+
+    </Triangle>
+
+    <Triangle>
+
+        <Base>12</Base>
+
+        <Side1>0</Side1>
+
+        <Side2>0</Side2>
+
+        <Perimeter>0</Perimeter>
+
+        <Area>66</Area>
+
+        <Type>Тип не определён</Type>
+
+    </Triangle>
+
+</Triangles>

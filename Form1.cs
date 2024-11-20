@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Xml.Linq; //для работы с LINQ to XML
 using System.Windows.Forms;
 
 namespace Triangle1
@@ -113,6 +114,36 @@ namespace Triangle1
             Form2 form = new Form2();
             form.Show(); // Открываем новую форму Form2
         }
+        private void SaveTriangleData(double a, double b, double c, double perimeter, double area, string type)
+        {
+            string filePath = @"C:\Users\kiril\Source\Repos\Triangle1\kolmnurgad.xml";
+
+            // Создаём структуру элемента "Triangle"
+            XElement triangleElement = new XElement("Triangle",
+                new XElement("Base", a),
+                new XElement("Side1", b),
+                new XElement("Side2", c),
+                new XElement("Perimeter", perimeter),
+                new XElement("Area", area),
+                new XElement("Type", type)
+            );
+
+            // Если файл существует, добавляем данные
+            if (System.IO.File.Exists(filePath))
+            {
+                XDocument doc = XDocument.Load(filePath);
+                doc.Element("Triangles").Add(triangleElement); // Добавляем новый треугольник
+                doc.Save(filePath); // Сохраняем файл
+            }
+            else
+            {
+                // Если файла нет, создаём новый
+                XDocument newDoc = new XDocument(
+                    new XElement("Triangles", triangleElement)
+                );
+                newDoc.Save(filePath);
+            }
+        }
 
         // Обработчик события клика по кнопке "Käivitamine"
         private void Btn_Click(object sender, EventArgs e)
@@ -166,7 +197,7 @@ namespace Triangle1
                         imagePath = @"C:\Users\kiril\Source\Repos\Triangle1\ravnostoron.png";
                         break;
                     case "Võrdhaarsed":
-                        imagePath = @"C:\Users\opilane\Source\Repos\Triangle1_\ravnobed.png";
+                        imagePath = @"C:\Users\kiril\Source\Repos\Triangle1\ravnobed.png";
                         break;
                     case "Ristkülikukujuline":
                         imagePath = @"C:\Users\opilane\Source\Repos\Triangle1_\prjamugol.png";
@@ -187,6 +218,9 @@ namespace Triangle1
                 {
                     trianglePicture.Image = Image.FromFile(imagePath);
                 }
+
+                // Сохраняем данные о треугольнике в XML
+                SaveTriangleData(a, b, c, triangle.Perimeter(), triangle.Area(), triangleType);
             }
             catch (FormatException)
             {
@@ -194,5 +228,10 @@ namespace Triangle1
                 MessageBox.Show("Palun sisestage andmed õigesti!");
             }
         }
+
+
+
+
     }
 }
+

@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using System.IO;
+using System.Xml.Linq;
+using System.Xml;
+
 
 namespace Triangle1
 {
@@ -15,7 +19,7 @@ namespace Triangle1
         public Form2()
         {
             // Свойства формы
-            this.Height = 800;
+            this.Height = 900;
             this.Width = 900;
             this.Text = "Töö kolmnurgaga";
             this.BackColor = Color.LightBlue; // Устанавливаем голубой фон
@@ -107,6 +111,59 @@ namespace Triangle1
             Controls.Add(trianglePicture);
         }
 
+
+        private void SaveTriangleDataToXml(double a, double b, double c, double perimeter, double area, string triangleType)
+        {
+            string filePath = @"C:\Users\kiril\Source\Repos\Triangle1\kolmnurgad.xml";  // Путь к XML-файлу
+
+            // Создаём элемент для нового треугольника
+            XElement triangleElement = new XElement("Triangle",
+                new XElement("Base", a),
+                new XElement("Side1", b),
+                new XElement("Side2", c),
+                new XElement("Perimeter", perimeter),
+                new XElement("Area", area),
+                new XElement("Type", triangleType)
+            );
+
+            // Настройки для XML-формата
+            XmlWriterSettings settings = new XmlWriterSettings
+            {
+                Indent = true,
+                IndentChars = "    ",
+                NewLineChars = Environment.NewLine + Environment.NewLine,  // Добавляем пустую строку между треугольниками
+                NewLineHandling = NewLineHandling.Replace
+            };
+
+            if (File.Exists(filePath))
+            {
+                // Загружаем существующий XML
+                XDocument doc = XDocument.Load(filePath);
+
+                // Добавляем новый элемент в XML
+                doc.Element("Triangles").Add(triangleElement);
+
+                // Сохраняем файл с новыми данными
+                using (XmlWriter writer = XmlWriter.Create(filePath, settings))
+                {
+                    doc.Save(writer);
+                }
+            }
+            else
+            {
+                // Создаём новый XML-документ
+                XDocument newDoc = new XDocument(
+                    new XElement("Triangles", triangleElement)
+                );
+
+                // Сохраняем новый файл
+                using (XmlWriter writer = XmlWriter.Create(filePath, settings))
+                {
+                    newDoc.Save(writer);
+                }
+            }
+        }
+
         private void Btn_Click(object sender, EventArgs e)
         {
             try
@@ -117,43 +174,61 @@ namespace Triangle1
                 double b = string.IsNullOrWhiteSpace(txtB.Text) ? 0 : Convert.ToDouble(txtB.Text);
                 double c = string.IsNullOrWhiteSpace(txtC.Text) ? 0 : Convert.ToDouble(txtC.Text);
 
-                // Проверяем существование треугольника по основанию и высоте
-                if (a <= 0 || h <= 0)
+                // Проверяем существование треугольника по сторонам, если все стороны введены
+                if (a > 0 && b > 0 && c > 0)
                 {
-                    MessageBox.Show("Sellist kolmnurka ei ole! (Osad väärtused on negatiivsed või null)");
-                    return;
-                }
+                    Triangle1 triangle = new Triangle1(a, b, c);
 
-                Triangle1 triangle = new Triangle1(a, h);
+                    if (!triangle.ExistTriangle)
+                    {
+                        MessageBox.Show("Sellist kolmnurka ei ole! (Triipuse poolte reeglid on rikutud)");
+                        return;
+                    }
 
-                // Если введены только основание и высота — выводим площадь
-                listView1.Items.Clear();
-                listView1.View = View.Details;
-                listView1.Columns.Clear();
-                listView1.Columns.Add("Nimi", 150);
-                listView1.Columns.Add("Väärtus", 150);
-                listView1.Items.Add(new ListViewItem(new[] { "alus", a.ToString() }));
-                listView1.Items.Add(new ListViewItem(new[] { "Kõrgus", h.ToString() }));
-                listView1.Items.Add(new ListViewItem(new[] { "Pindala", triangle.Area().ToString() }));
+                    // Очищаем и заполняем ListView
+                    listView1.Items.Clear();
+                    listView1.View = View.Details;
+                    listView1.Columns.Clear();
+                    listView1.Columns.Add("Nimi", 150);
+                    listView1.Columns.Add("Väärtus", 150);
+                    listView1.Items.Add(new ListViewItem(new[] { "külg a", a.ToString() }));
+                    listView1.Items.Add(new ListViewItem(new[] { "külg b", b.ToString() }));
+                    listView1.Items.Add(new ListViewItem(new[] { "külg c", c.ToString() }));
+                    listView1.Items.Add(new ListViewItem(new[] { "Perimetr", triangle.Perimeter().ToString() }));
+                    listView1.Items.Add(new ListViewItem(new[] { "Pindala", triangle.Area().ToString() }));
 
-                // Если все три стороны введены, определяем тип треугольника
-                if (b > 0 && c > 0)
-                {
-                    // Используем метод для определения типа по трём сторонам
+                    // Определяем тип треугольника
                     string triangleType = triangle.GetTriangleType();
                     listView1.Items.Add(new ListViewItem(new[] { "Tüüp", triangleType }));
 
-                    // Обновляем изображение
+                    // Обновляем изображение в зависимости от типа треугольника
                     UpdateTriangleImage(triangleType);
+
+                    // Сохраняем данные треугольника в XML
+                    SaveTriangleDataToXml(a, b, c, triangle.Perimeter(), triangle.Area(), triangleType);
+                }
+                else if (a > 0 && h > 0) // Если введены только основание и высота
+                {
+                    Triangle1 triangle = new Triangle1(a, h);
+
+                    listView1.Items.Clear();
+                    listView1.View = View.Details;
+                    listView1.Columns.Clear();
+                    listView1.Columns.Add("Nimi", 150);
+                    listView1.Columns.Add("Väärtus", 150);
+                    listView1.Items.Add(new ListViewItem(new[] { "alus", a.ToString() }));
+                    listView1.Items.Add(new ListViewItem(new[] { "Kõrgus", h.ToString() }));
+                    listView1.Items.Add(new ListViewItem(new[] { "Pindala", triangle.Area1().ToString() }));
+
+                    // Здесь тип треугольника можно не определять, так как доступно только основание и высота
+                    trianglePicture.Image = null;
+
+                    // Сохраняем данные о треугольнике с основанием и высотой в XML
+                    SaveTriangleDataToXml(a, 0, 0, 0, triangle.Area1(), "Тип не определён");
                 }
                 else
                 {
-                    // Если введены только основание и высота — определяем тип по этим данным
-                    string triangleType = triangle.GetTriangleTypeFromBaseAndHeight();
-                    listView1.Items.Add(new ListViewItem(new[] { "Tüüp", triangleType }));
-
-                    // Обновляем изображение
-                    UpdateTriangleImage(triangleType);
+                    MessageBox.Show("Palun täitke kõik vajalikud väljad (alus, külg, kõrgus).");
                 }
             }
             catch (FormatException)
@@ -164,30 +239,45 @@ namespace Triangle1
 
 
 
-
         private void UpdateTriangleImage(string triangleType)
         {
             try
             {
-                // Словарь для сопоставления типов треугольников с полными путями файлов
-                var imagePaths = new Dictionary<string, string>
-        {
-            { "Võrdkülgne", @"C:\Images\equilateral_triangle.png" },
-            { "Võrdhaarsed", @"C:\Images\isosceles_triangle.png" },
-            { "Ristkülikukujuline", @"C:\Images\right_triangle.png" },
-            { "nüri", @"C:\Images\obtuse_triangle.png" },
-            { "Teravnurkne", @"C:\Images\acute_triangle.png" },
-            { "Mitmekülgne", @"C:\Images\scalene_triangle.png" }
-        };
+                string imagePath = "";
+                switch (triangleType)
+                {
+                    case "Võrdkülgne":
+                        imagePath = @"C:\Users\kiril\Source\Repos\Triangle1\ravnostoron.png";
+                        break;
+                    case "Võrdhaarsed":
+                        imagePath = @"C:\Users\kiril\Source\Repos\Triangle1\ravnobed.png";
+                        break;
+                    case "Ristkülikukujuline":
+                        imagePath = @"C:\Users\opilane\Source\Repos\Triangle1_\prjamugol.png";
+                        break;
+                    case "nüri":
+                        imagePath = @"C:\Users\opilane\Source\Repos\Triangle1_\tipougol.png";
+                        break;
+                    case "Teravnurkne":
+                        imagePath = @"C:\Users\opilane\Source\Repos\Triangle1_\ostrougol.jpg";
+                        break;
+                    case "Mitmekülgne":
+                        imagePath = @"C:\Users\opilane\Source\Repos\Triangle1_\raznostoron.png";
+                        break;
+                    default:
+                        MessageBox.Show("Tundmatu kolmnurga tüüp.");
+                        trianglePicture.Image = null;
+                        return;
+                }
 
-                // Проверка на наличие изображения
-                if (imagePaths.TryGetValue(triangleType, out string imagePath))
+                // Проверка на существование файла
+                if (File.Exists(imagePath))
                 {
                     trianglePicture.Image = Image.FromFile(imagePath);
                 }
                 else
                 {
-                    MessageBox.Show("Pilti ei leitud.");
+                    MessageBox.Show("Pilti ei leitud: " + imagePath);
                     trianglePicture.Image = null;
                 }
             }
