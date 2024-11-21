@@ -22,55 +22,7 @@
 
     <Triangle>
 
-        <Base>12</Base>
-
-        <Side1>12</Side1>
-
-        <Side2>12</Side2>
-
-        <Perimeter>36</Perimeter>
-
-        <Area>62.353829072479584</Area>
-
-        <Type>Võrdkülgne</Type>
-
-    </Triangle>
-
-    <Triangle>
-
         <Base>14</Base>
-
-        <Side1>15</Side1>
-
-        <Side2>14</Side2>
-
-        <Perimeter>43</Perimeter>
-
-        <Area>88.661928131526665</Area>
-
-        <Type>Võrdhaarsed</Type>
-
-    </Triangle>
-
-    <Triangle>
-
-        <Base>54</Base>
-
-        <Side1>24</Side1>
-
-        <Side2>53</Side2>
-
-        <Perimeter>131</Perimeter>
-
-        <Area>625.09874219998233</Area>
-
-        <Type>Teravnurkne</Type>
-
-    </Triangle>
-
-    <Triangle>
-
-        <Base>12</Base>
 
         <Side1>0</Side1>
 
@@ -78,9 +30,73 @@
 
         <Perimeter>0</Perimeter>
 
-        <Area>66</Area>
+        <Area>91</Area>
 
-        <Type>Тип не определён</Type>
+        <Type>Tüüp ei leitud</Type>
+
+    </Triangle>
+
+    <Triangle>
+
+        <Base>14</Base>
+
+        <Side1>13</Side1>
+
+        <Side2>13</Side2>
+
+        <Perimeter>40</Perimeter>
+
+        <Area>76.681158050723255</Area>
+
+        <Type>Võrdhaarsed</Type>
+
+    </Triangle>
+
+    <Triangle>
+
+        <Base>14</Base>
+
+        <Side1>13</Side1>
+
+        <Side2>13</Side2>
+
+        <Perimeter>40</Perimeter>
+
+        <Area>76.681158050723255</Area>
+
+        <Type>Võrdhaarsed</Type>
+
+    </Triangle>
+
+    <Triangle>
+
+        <Base>14</Base>
+
+        <Side1>13</Side1>
+
+        <Side2>13</Side2>
+
+        <Perimeter>40</Perimeter>
+
+        <Area>76.681158050723255</Area>
+
+        <Type>Võrdhaarsed</Type>
+
+    </Triangle>
+
+    <Triangle>
+
+        <Base>14</Base>
+
+        <Side1>22</Side1>
+
+        <Side2>13</Side2>
+
+        <Perimeter>49</Perimeter>
+
+        <Area>85.99963662713931</Area>
+
+        <Type>Teravnurkne</Type>
 
     </Triangle>
 

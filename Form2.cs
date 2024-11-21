@@ -114,7 +114,7 @@ namespace Triangle1
 
         private void SaveTriangleDataToXml(double a, double b, double c, double perimeter, double area, string triangleType)
         {
-            string filePath = @"C:\Users\kiril\Source\Repos\Triangle1\kolmnurgad.xml";  // Путь к XML-файлу
+            string filePath = @"C:\Users\opilane\Source\Repos\TriangleTEST1\kolmnurgad.xml";  // Путь к XML-файлу
 
             // Создаём элемент для нового треугольника
             XElement triangleElement = new XElement("Triangle",
@@ -247,7 +247,7 @@ namespace Triangle1
                 switch (triangleType)
                 {
                     case "Võrdkülgne":
-                        imagePath = @"C:\Users\opilane\Source\Repos\TriangleTEST\raznostoron.png";
+                        imagePath = @"C:\Users\opilane\Source\Repos\TriangleTEST1\ravnostoron.png";
                         break;
                     case "Võrdhaarsed":
                         imagePath = @"C:\Users\opilane\Source\Repos\TriangleTEST\ravnobed.png";
