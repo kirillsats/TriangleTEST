@@ -18,3 +18,13 @@ C:\Users\kiril\Source\Repos\Triangle1\obj\Debug\Triangle1.csproj.GenerateResourc
 C:\Users\kiril\Source\Repos\Triangle1\obj\Debug\Triangle1.csproj.CoreCompileInputs.cache
 C:\Users\kiril\Source\Repos\Triangle1\obj\Debug\Triangle1.exe
 C:\Users\kiril\Source\Repos\Triangle1\obj\Debug\Triangle1.pdb
+C:\Users\opilane\Source\Repos\TriangleTEST\bin\Debug\Triangle1.exe.config
+C:\Users\opilane\Source\Repos\TriangleTEST\bin\Debug\Triangle1.exe
+C:\Users\opilane\Source\Repos\TriangleTEST\bin\Debug\Triangle1.pdb
+C:\Users\opilane\Source\Repos\TriangleTEST\obj\Debug\Triangle1.csproj.AssemblyReference.cache
+C:\Users\opilane\Source\Repos\TriangleTEST\obj\Debug\Triangle1.Form1.resources
+C:\Users\opilane\Source\Repos\TriangleTEST\obj\Debug\Triangle1.Form2.resources
+C:\Users\opilane\Source\Repos\TriangleTEST\obj\Debug\Triangle1.csproj.GenerateResource.cache
+C:\Users\opilane\Source\Repos\TriangleTEST\obj\Debug\Triangle1.csproj.CoreCompileInputs.cache
+C:\Users\opilane\Source\Repos\TriangleTEST\obj\Debug\Triangle1.exe
+C:\Users\opilane\Source\Repos\TriangleTEST\obj\Debug\Triangle1.pdb

@@ -137,11 +137,7 @@ namespace Triangle1
             }
             else
             {
-                // Если файла нет, создаём новый
-                XDocument newDoc = new XDocument(
-                    new XElement("Triangles", triangleElement)
-                );
-                newDoc.Save(filePath);
+                
             }
         }
 
@@ -194,22 +190,22 @@ namespace Triangle1
                 switch (triangleType)
                 {
                     case "Võrdkülgne":
-                        imagePath = @"C:\Users\kiril\Source\Repos\Triangle1\ravnostoron.png";
+                        imagePath = @"C:\Users\opilane\Source\Repos\TriangleTEST\raznostoron.png";
                         break;
                     case "Võrdhaarsed":
-                        imagePath = @"C:\Users\kiril\Source\Repos\Triangle1\ravnobed.png";
+                        imagePath = @"C:\Users\opilane\Source\Repos\TriangleTEST\ravnobed.png";
                         break;
                     case "Ristkülikukujuline":
-                        imagePath = @"C:\Users\opilane\Source\Repos\Triangle1_\prjamugol.png";
+                        imagePath = @"C:\Users\opilane\Source\Repos\TriangleTEST\prjamugol.png";
                         break;
                     case "nüri":
-                        imagePath = @"C:\Users\opilane\Source\Repos\Triangle1_\tipougol.png";
+                        imagePath = @"C:\Users\opilane\Source\Repos\TriangleTEST\tipougol.png";
                         break;
                     case "Teravnurkne":
-                        imagePath = @"C:\Users\opilane\Source\Repos\Triangle1_\ostrougol.jpg";
+                        imagePath = @"C:\Users\opilane\Source\Repos\TriangleTEST\ostrougol.jpg";
                         break;
                     case "Mitmekülgne":
-                        imagePath = @"C:\Users\opilane\Source\Repos\Triangle1_\raznostoron.png";
+                        imagePath = @"C:\Users\opilane\Source\Repos\TriangleTEST\raznostoron.png";
                         break;
                 }
 
